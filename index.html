@@ -125,8 +125,9 @@
       "hero hero status github"
       "hero hero clock   github"
       "tech tech projects projects"
-      "chess reading philosophy philosophy"
-      "contact blog blog now";
+      "chess reading philosophy game"
+      "contact blog blog game"
+      "now now now now";
   }
 
   /* ---------- Cards ---------- */
@@ -264,6 +265,14 @@
     font-weight: 700;
 
     margin-bottom: 18px;
+  }
+
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: inherit;
   }
 
   .hero h1 {
@@ -578,6 +587,117 @@
     grid-area: philosophy;
   }
 
+  .chess-art,
+  .philosophy-art {
+    margin-top: 18px;
+    width: 64px;
+    height: 64px;
+    position: relative;
+  }
+
+  .chess-art {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    transform: rotate(-4deg);
+    animation: board-drift 4s ease-in-out infinite;
+  }
+
+  .chess-art span {
+    background: var(--accent-soft);
+  }
+
+  .chess-art span:nth-child(3n),
+  .chess-art span:nth-child(4n + 2) {
+    background: rgba(242, 166, 90, 0.48);
+  }
+
+  .chess-art span::after {
+    content: "";
+    display: block;
+    width: 5px;
+    height: 5px;
+    margin: 7px auto 0;
+    border-radius: 50%;
+    background: var(--mint);
+    opacity: 0.75;
+  }
+
+  .philosophy-art {
+    border: 1px solid rgba(169, 155, 255, 0.5);
+    border-radius: 50%;
+    animation: idea-orbit 6s linear infinite;
+  }
+
+  .philosophy-art::before,
+  .philosophy-art::after {
+    content: "";
+    position: absolute;
+    border: 1px solid rgba(169, 155, 255, 0.45);
+    border-radius: 50%;
+  }
+
+  .philosophy-art::before {
+    inset: 9px -5px;
+    transform: rotate(55deg);
+  }
+
+  .philosophy-art::after {
+    width: 7px;
+    height: 7px;
+    top: 2px;
+    left: 27px;
+    background: var(--violet);
+    border: 0;
+    box-shadow: 0 0 12px rgba(169, 155, 255, 0.75);
+  }
+
+  @keyframes board-drift {
+    0%, 100% { transform: rotate(-4deg) translateY(0); }
+    50% { transform: rotate(-1deg) translateY(-4px); }
+  }
+
+  @keyframes idea-orbit {
+    to { transform: rotate(360deg); }
+  }
+
+  /* ---------- Space Invaders ---------- */
+
+  .game {
+    grid-area: game;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding: 14px;
+  }
+
+  .game .label {
+    margin-bottom: 7px;
+  }
+
+  .game-frame {
+    width: 100%;
+    flex: 1;
+    height: auto;
+    min-height: 300px;
+    aspect-ratio: auto;
+    display: block;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg-deep);
+  }
+
+  .game-link {
+    align-self: flex-start;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 13.5px;
+    font-weight: 600;
+    margin-top: 10px;
+  }
+
   .personal-card {
     display: flex;
 
@@ -604,12 +724,41 @@
     margin-bottom: 8px;
   }
 
+  .reading-label {
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+  }
+
   .personal-text {
     color: var(--text-muted);
 
     font-size: 13.5px;
 
     line-height: 1.55;
+  }
+
+  .book-cover {
+    width: 82px;
+    height: 116px;
+    display: block;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    margin-top: 14px;
+  }
+
+  .book-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .book-link:hover .personal-title {
+    color: var(--accent);
   }
 
   /* ---------- Contact ---------- */
@@ -679,7 +828,7 @@
   align-items: center;
   justify-content: center;
 
-  /* color: var(--text); */
+  color: var(--text);
 
   transition:
     border-color 0.2s ease,
@@ -693,10 +842,11 @@
   transform: translateY(-2px);
 }
 
-.social-row img {
+.social-row svg {
   width: 18px;
   height: 18px;
   display: block;
+  fill: currentColor;
 }
 
   /* ---------- Blog ---------- */
@@ -804,6 +954,7 @@
         "projects projects"
         "chess reading"
         "philosophy philosophy"
+        "game game"
         "contact blog"
         "now now";
     }
@@ -833,6 +984,7 @@
         "chess"
         "reading"
         "philosophy"
+        "game"
         "contact"
         "blog"
         "now";
@@ -840,6 +992,10 @@
 
     .project-row {
       grid-template-columns: 1fr;
+    }
+
+    .game-frame {
+      height: 150px;
     }
   }
 
@@ -856,6 +1012,11 @@
     }
 
     .dot {
+      animation: none;
+    }
+
+    .chess-art,
+    .philosophy-art {
       animation: none;
     }
   }
@@ -906,7 +1067,9 @@
       <div>
 
         <div class="avatar">
-          A
+          <img
+            src="imgur.jpeg"
+            alt="Aryan Tiwari">
         </div>
 
         <h1>
@@ -1248,6 +1411,13 @@
           and climb my way to 1000 Elo.
         </div>
 
+        <div class="chess-art" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+        </div>
+
       </div>
 
     </div>
@@ -1263,16 +1433,69 @@
           📖
         </div>
 
-        <div class="personal-title">
-          Currently reading
-        </div>
+        <a
+          class="book-link"
+          href="https://www.amazon.in/Alchemist-Paulo-Coelho/dp/8172234988"
+          target="_blank"
+          rel="noopener">
 
-        <div class="personal-text">
-          Exploring ideas, stories, and technical
-          rabbit holes that keep me curious.
-        </div>
+          
+
+          <div class="personal-title">
+            Currently reading
+          </div>
+<div class="reading-label">
+            The Alchemist by Paulo Coelho
+          </div>
+          <img
+            class="book-cover"
+            src="https://m.media-amazon.com/images/I/617lxveUjYL._SY342_.jpg"
+            alt="The Alchemist book cover"
+            loading="lazy">
+
+        </a>
 
       </div>
+
+    </div>
+
+
+    <!-- ================= SPACE INVADERS ================= -->
+
+    <div class="card game">
+
+      <div class="label">
+
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2">
+
+          <path d="M12 3v3M5.6 5.6l2.1 2.1M3 12h3M5.6 18.4l2.1-2.1M18.4 18.4l-2.1-2.1M21 12h-3M18.4 5.6l-2.1 2.1M12 18v3"/>
+          <circle cx="12" cy="12" r="4"/>
+
+        </svg>
+
+        Play Space Invaders
+
+      </div>
+
+      <iframe
+        class="game-frame"
+        src="https://aryantiw.github.io/space-invaders/"
+        title="Space Invaders game"
+        loading="lazy"
+        allow="fullscreen">
+      </iframe>
+
+      <a
+        class="game-link"
+        href="https://aryantiw.github.io/space-invaders/"
+        target="_blank"
+        rel="noopener">
+        Open full game ↗
+      </a>
 
     </div>
 
@@ -1295,6 +1518,8 @@
           If I don't understand how something works,
           I try building a smaller version of it.
         </div>
+
+        <div class="philosophy-art" aria-hidden="true"></div>
 
       </div>
 
@@ -1384,9 +1609,9 @@
     aria-label="GitHub"
     title="GitHub">
 
-    <img
-      src="https://cdn.simpleicons.org/github"
-      alt="GitHub">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.58.1.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.69-1.28-1.69-1.04-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.09.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.8 1.18 1.83 1.18 3.09 0 4.43-2.69 5.4-5.25 5.69.41.36.78 1.07.78 2.15 0 1.56-.01 2.81-.01 3.19 0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5Z"/>
+    </svg>
   </a>
 
 
@@ -1398,9 +1623,9 @@
     aria-label="LinkedIn"
     title="LinkedIn">
 
-    <img
-      src="https://cdn.simpleicons.org/linkedin"
-      alt="LinkedIn">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4.98 3.5A2.48 2.48 0 1 1 5 8.46a2.48 2.48 0 0 1-.02-4.96ZM3 9.75h4V21H3V9.75Zm6.5 0h3.83v1.54h.05c.53-1.01 1.83-2.08 3.76-2.08C21.16 9.21 22 11.75 22 15.05V21h-4v-5.28c0-1.26-.02-2.88-1.75-2.88-1.76 0-2.03 1.37-2.03 2.79V21h-4V9.75Z"/>
+    </svg>
   </a>
 
 
@@ -1412,9 +1637,9 @@
     aria-label="X"
     title="X">
 
-    <img
-      src="https://cdn.simpleicons.org/x"
-      alt="X">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M18.9 2H22l-6.77 7.74L23.2 22h-6.24l-4.89-6.39L6.48 22H3.37l7.24-8.28L2.8 2h6.4l4.42 5.84L18.9 2Zm-1.1 17.7h1.73L8.27 4.18H6.41L17.8 19.7Z"/>
+    </svg>
   </a>
 
 </div>
