@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Projects - Aryan Tiwari</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #12141a;
+    --bg-deep: #0c0d11;
+    --surface: #1b1e27;
+    --surface-hi: #22262f;
+    --border: #2a2e3a;
+    --text: #edeef2;
+    --text-muted: #8c92a3;
+    --accent: #b8c98a;
+    --accent-soft: rgba(184, 201, 138, 0.14);
+    --mint: #6ee7b7;
+    --font-display: 'Instrument Serif', serif;
+    --font-sans: 'Manrope', sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 28px 20px 60px;
+    color: var(--text);
+    font-family: var(--font-sans);
+    background:
+      radial-gradient(circle at 15% 0%, rgba(184,201,138,0.07), transparent 45%),
+      radial-gradient(circle at 85% 20%, rgba(169,155,255,0.05), transparent 40%),
+      var(--bg);
+  }
+
+  .wrap { max-width: 1180px; margin: 0 auto; }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 76px;
+    padding: 0 6px;
+  }
+
+  .brand {
+    color: var(--text);
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-style: italic;
+    text-decoration: none;
+  }
+
+  .brand span { color: var(--accent); }
+
+  nav { display: flex; gap: 28px; }
+
+  nav a {
+    color: var(--text-muted);
+    font-size: 14.5px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  nav a:hover, nav a.active { color: var(--text); }
+
+  .intro {
+    max-width: 700px;
+    margin-bottom: 48px;
+    animation: rise 0.6s ease both;
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 14px;
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+  }
+
+  .eyebrow::before {
+    width: 28px;
+    height: 1px;
+    background: var(--accent);
+    content: '';
+  }
+
+  h1 {
+    margin: 0 0 14px;
+    font-family: var(--font-display);
+    font-size: clamp(48px, 7vw, 78px);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 0.98;
+  }
+
+  .intro p {
+    max-width: 58ch;
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .repo-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 24px;
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .repo-link:hover { color: var(--accent); }
+
+  .repo-link span { color: var(--accent); font-size: 17px; }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .project-card {
+    display: flex;
+    min-height: 320px;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 28px;
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    background: var(--surface);
+    opacity: 0;
+    transform: translateY(12px);
+    animation: rise 0.6s ease forwards;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .project-card:nth-child(2) { animation-delay: 0.08s; }
+  .project-card:nth-child(3) { animation-delay: 0.16s; }
+  .project-card:nth-child(4) { animation-delay: 0.24s; }
+  .project-card:nth-child(5) { animation-delay: 0.32s; }
+  .project-card:nth-child(6) { animation-delay: 0.40s; }
+  .project-card:nth-child(7) { animation-delay: 0.48s; }
+
+  .project-card:hover {
+    border-color: rgba(184, 201, 138, 0.5);
+    background: var(--surface-hi);
+    transform: translateY(-4px);
+  }
+
+  .project-thumb {
+    display: block;
+    width: calc(100% + 56px);
+    height: 112px;
+    min-height: 112px;
+    margin: -28px -28px 24px;
+    border-bottom: 1px solid var(--border);
+    background-position: center;
+    background-size: cover;
+    object-fit: cover;
+    opacity: 0.82;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .project-card:hover .project-thumb {
+    opacity: 1;
+    transform: scale(1.015);
+  }
+
+  .project-number {
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+  }
+
+  .project-title {
+    margin: 34px 0 10px;
+    font-size: 23px;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  .project-description {
+    max-width: 52ch;
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 13.5px;
+    line-height: 1.65;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 22px;
+  }
+
+  .tag {
+    padding: 6px 9px;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    color: var(--text-muted);
+    background: var(--bg-deep);
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .project-footer {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-top: 30px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+  }
+
+  .project-footer a {
+    color: var(--accent);
+    font-size: 12.5px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .project-footer a:hover { color: var(--text); }
+
+  .project-footer .muted { color: var(--text-muted); }
+
+  footer {
+    margin-top: 60px;
+    color: var(--text-muted);
+    font-size: 12.5px;
+    text-align: center;
+  }
+
+  @keyframes rise {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 700px) {
+    body { padding: 22px 16px 44px; }
+    .topbar { margin-bottom: 58px; }
+    nav { gap: 16px; }
+    nav a { font-size: 12px; }
+    .projects-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .topbar { align-items: flex-start; }
+    nav { display: none; }
+    .project-card { min-height: 300px; padding: 23px; }
+    .project-thumb { width: calc(100% + 46px); margin: -23px -23px 24px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .intro, .project-card { animation: none; opacity: 1; transform: none; }
+    .project-card:hover { transform: none; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <a class="brand" href="port2bento.html">aryan<span>.dev</span></a>
+      <nav aria-label="Main navigation">
+        <a href="port2bento.html">Home</a>
+        <a class="active" href="projects.html" aria-current="page">Projects</a>
+        <a href="https://aryantiw.github.io/blog/">Blog</a>
+        <a href="port2bento.html#contact-card">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="intro">
+        <div class="eyebrow">Selected work</div>
+        <h1>Things I've built.</h1>
+        <p>A collection of experiments, useful tools, and full-stack systems built across web development, data, and developer tooling.</p>
+        <a class="repo-link" href="https://github.com/aryantiw?tab=repositories" target="_blank" rel="noopener noreferrer">
+          View all repositories <span aria-hidden="true">&#8599;</span>
+        </a>
+      </section>
+
+      <section class="projects-grid" aria-label="Projects">
+        <article class="project-card">
+          <div>
+            <img class="project-thumb" src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fblockchain-mirror.onrender.com%2F?w=1200" alt="Blockchain Viewer project UI screenshot">
+            <div class="project-number">01 / BLOCKCHAIN</div>
+            <h2 class="project-title">Blockchain Viewer &amp; API</h2>
+            <p class="project-description">A Flask-powered blockchain simulation with transaction creation, mining, chain retrieval, and Proof-of-Work validation.</p>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">Flask</span>
+              <span class="tag">JavaScript</span>
+            </div>
+          </div>
+          <div class="project-footer">
+            <a href="https://blockchain-mirror.onrender.com/" target="_blank" rel="noopener noreferrer">Live project &#8599;</a>
+            <a href="https://github.com/aryantiw/blockchain-mirror" target="_blank" rel="noopener noreferrer">Source code &#8599;</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div>
+            <img class="project-thumb" src="https://opengraph.githubassets.com/1/aryantiw/Bodhak-Co" alt="PDF Tools Suite project preview">
+            <div class="project-number">02 / DOCUMENTS</div>
+            <h2 class="project-title">PDF Tools Suite</h2>
+            <p class="project-description">A Streamlit workspace bundling seven PDF and NLP utilities, including conversion, extraction, summarization, and research-paper search.</p>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">Streamlit</span>
+              <span class="tag">Transformers</span>
+            </div>
+          </div>
+          <div class="project-footer">
+            <a href="https://huggingface.co/spaces/bodhak/pdf-tools-suite" target="_blank" rel="noopener noreferrer">Live project &#8599;</a>
+            <span class="muted">Hugging Face Space</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div>
+            <img class="project-thumb" src="https://opengraph.githubassets.com/1/aryantiw/url-shortner" alt="URL Shortener project preview">
+            <div class="project-number">03 / WEB TOOL</div>
+            <h2 class="project-title">URL Shortener</h2>
+            <p class="project-description">A RESTful URL shortening service with CORS-enabled Flask APIs, SQLite persistence, redirection, and a React frontend.</p>
+            <div class="tags">
+              <span class="tag">Flask</span>
+              <span class="tag">React</span>
+              <span class="tag">SQLite</span>
+            </div>
+          </div>
+          <div class="project-footer">
+            <a href="https://url-shortner-rina.onrender.com/" target="_blank" rel="noopener noreferrer">Live project &#8599;</a>
+            <a href="https://github.com/aryantiw/url-shortner" target="_blank" rel="noopener noreferrer">Source code &#8599;</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div>
+            <div class="project-thumb" role="img" aria-label="Intent Tabs project preview" style="background-image: url('https://opengraph.githubassets.com/1/aryantiw/focussed-chrome-extension');"></div>
+            <div class="project-number">04 / BROWSER EXTENSION</div>
+            <h2 class="project-title">Intent Tabs</h2>
+            <p class="project-description">A Chrome extension that organizes browsing sessions by user intent, making tab-heavy workflows easier to navigate and manage.</p>
+            <div class="tags">
+              <span class="tag">HTML5</span>
+              <span class="tag">CSS3</span>
+              <span class="tag">JavaScript</span>
+            </div>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/aryantiw?tab=repositories" target="_blank" rel="noopener noreferrer">View on GitHub &#8599;</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div>
+            <img class="project-thumb" src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Faryantiw.github.io%2Fspace-invaders%2F?w=1200" alt="Alien Invasion project UI screenshot">
+            <div class="project-number">05 / ARCADE GAME</div>
+            <h2 class="project-title">Alien Invasion</h2>
+            <p class="project-description">A responsive space-themed arcade shooter with keyboard and touch controls, escalating difficulty, lives, and a shared Firebase leaderboard.</p>
+            <div class="tags">
+              <span class="tag">JavaScript</span>
+              <span class="tag">Firebase</span>
+              <span class="tag">Game UI</span>
+            </div>
+          </div>
+          <div class="project-footer">
+            <a href="https://aryantiw.github.io/space-invaders/" target="_blank" rel="noopener noreferrer">Play game &#8599;</a>
+            <a href="https://github.com/aryantiw/space-invaders" target="_blank" rel="noopener noreferrer">Source code &#8599;</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div>
+            <div class="project-thumb" role="img" aria-label="MERN Estate project preview" style="background-image: url('https://opengraph.githubassets.com/1/aryantiw/mern-estate');"></div>
+            <div class="project-number">06 / REAL ESTATE</div>
+            <h2 class="project-title">MERN Estate</h2>
+            <p class="project-description">A full-stack real estate platform for browsing, searching, and saving property listings with authentication, filters, favorites, and agent contact.</p>
+            <div class="tags">
+              <span class="tag">MongoDB</span>
+              <span class="tag">Express</span>
+              <span class="tag">React</span>
+              <span class="tag">Node.js</span>
+            </div>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/aryantiw/mern-estate" target="_blank" rel="noopener noreferrer">Source code &#8599;</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div>
+            <div class="project-thumb" role="img" aria-label="Sentiment Analysis project preview" style="background-image: url('https://opengraph.githubassets.com/1/aryantiw/sentiment-analysis');"></div>
+            <div class="project-number">07 / MACHINE LEARNING</div>
+            <h2 class="project-title">Sentiment Analysis</h2>
+            <p class="project-description">A Python-based sentiment analysis project for processing and evaluating text data, with preprocessing utilities and accuracy checks.</p>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">NLP</span>
+              <span class="tag">Data Science</span>
+            </div>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/aryantiw/sentiment-analysis" target="_blank" rel="noopener noreferrer">Source code &#8599;</a>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer>Built by Aryan Tiwari · Updated 2026</footer>
+  </div>
+</body>
+</html>
