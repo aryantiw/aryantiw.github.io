@@ -52,6 +52,16 @@
     font-family: var(--font-sans);
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
   body {
     background:
       radial-gradient(
@@ -1047,8 +1057,8 @@
 
     <nav>
       <a href="#">Home</a>
-      <a href="#">Projects</a>
-      <a href="#">Blog</a>
+      <a href="projects.html">Projects</a>
+      <a href="https://aryantiw.github.io/blog/">Blog</a>
       <a href="#contact-card">Contact</a>
     </nav>
 
@@ -1687,7 +1697,7 @@
       </div>
 
 
-      <a href="#">
+      <a href="https://aryantiw.github.io/blog/">
         Read more →
       </a>
 
